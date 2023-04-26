@@ -1,21 +1,15 @@
 import { MongoClient } from 'mongodb';
-const url = 'mongodb+srv://...';
+const url =
+  'mongodb+srv://admin:admin@cluster0.hzykjxj.mongodb.net/?retryWrites=true&w=majority';
 const options = { useNewUrlParser: true };
-let client = null;
+let connectDB;
 
-async function connectDB() {
-  if (client && client.isConnected()) {
-    // 이미 연결되어 있다면 클라이언트 객체를 그대로 반환합니다.
-    return client;
+if (process.env.NODE_ENV === 'development') {
+  if (!global._mongo) {
+    global._mongo = new MongoClient(url, options).connect();
   }
-  try {
-    client = await MongoClient.connect(url, options);
-    console.log('MongoDB 연결 성공');
-    return client;
-  } catch (error) {
-    console.error('MongoDB 연결 실패', error);
-    throw error;
-  }
+  connectDB = global._mongo;
+} else {
+  connectDB = new MongoClient(url, options).connect();
 }
-
 export { connectDB };
