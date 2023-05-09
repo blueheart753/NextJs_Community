@@ -18,3 +18,30 @@
   color: grey;
   margin: 5px 0px;
 }
+
+.moveList {
+  text-decoration: none;
+  color: inherit;
+  font-size: 2em;
+}
+
+.Box {
+  margin-top: 20px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.darkMode {
+  padding: 10px;
+  font-size: 1.25em;
+  border-radius: 5px;
+  border: 0;
+  background: #bdffcf;
+  transition: 0.3s;
+}
+
+.darkMode:hover {
+  background: #333;
+  color: #fff;
+}
